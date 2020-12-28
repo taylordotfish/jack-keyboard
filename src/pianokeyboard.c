@@ -257,6 +257,8 @@ bind_keys_qwerty(PianoKeyboard *pk)
 	bind_key(pk, 61, 28);
 
 	/* Upper keyboard row, first octave - "qwertyu". 24 is q, 10 is 1. */
+	bind_key(pk, 49, 22); /* backtick */
+	bind_key(pk, 23, 23); /* tab */
 	bind_key(pk, 24, 24);
 	bind_key(pk, 11, 25);
 	bind_key(pk, 25, 26);
@@ -281,6 +283,7 @@ bind_keys_qwerty(PianoKeyboard *pk)
 	bind_key(pk, 34, 41);
 	bind_key(pk, 21, 42);
 	bind_key(pk, 35, 43);
+	bind_key(pk, 22, 44); /* backspace */
 	bind_key(pk, 51, 45); /* yes, really, at least here... */
 }
 
