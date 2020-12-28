@@ -239,8 +239,8 @@ bind_keys_qwerty(PianoKeyboard *pk)
 	bind_key(pk, 52, 12);	/* C0 */
 	bind_key(pk, 39, 13);
 	bind_key(pk, 53, 14);
-	bind_key(pk, 40, 15);
-	bind_key(pk, 54, 16);
+	bind_key(pk, 54, 15);
+	bind_key(pk, 41, 16);
 	bind_key(pk, 55, 17);
 	bind_key(pk, 42, 18);
 	bind_key(pk, 56, 19);
@@ -253,8 +253,8 @@ bind_keys_qwerty(PianoKeyboard *pk)
 	bind_key(pk, 59, 24);
 	bind_key(pk, 46, 25);
 	bind_key(pk, 60, 26);
-	bind_key(pk, 47, 27);
-	bind_key(pk, 61, 28);
+	bind_key(pk, 61, 27);
+	bind_key(pk, 48, 28);
 
 	/* Upper keyboard row, first octave - "qwertyu". 24 is q, 10 is 1. */
 	bind_key(pk, 49, 22); /* backtick */
@@ -262,8 +262,8 @@ bind_keys_qwerty(PianoKeyboard *pk)
 	bind_key(pk, 24, 24);
 	bind_key(pk, 11, 25);
 	bind_key(pk, 25, 26);
-	bind_key(pk, 12, 27);
-	bind_key(pk, 26, 28);
+	bind_key(pk, 26, 27);
+	bind_key(pk, 13, 28);
 	bind_key(pk, 27, 29);
 	bind_key(pk, 14, 30);
 	bind_key(pk, 28, 31);
@@ -276,8 +276,8 @@ bind_keys_qwerty(PianoKeyboard *pk)
 	bind_key(pk, 31, 36);
 	bind_key(pk, 18, 37);
 	bind_key(pk, 32, 38);
-	bind_key(pk, 19, 39);
-	bind_key(pk, 33, 40);
+	bind_key(pk, 33, 39);
+	bind_key(pk, 20, 40);
 
 	/* We might as well bind these too: "[=]\" */
 	bind_key(pk, 34, 41);
@@ -428,7 +428,7 @@ piano_keyboard_size_request(GtkWidget *widget, GtkRequisition *requisition)
 static int is_black(int key)
 {
 	int note_in_octave = key % 12;
-	if(              note_in_octave == 1 || note_in_octave == 3 ||
+	if(              note_in_octave == 1 || note_in_octave == 4 ||
 	     note_in_octave == 6 || note_in_octave == 8 || note_in_octave == 10)
 		return 1;
 	return 0;
@@ -436,23 +436,7 @@ static int is_black(int key)
 
 static double black_key_left_shift(int key)
 {
-	int note_in_octave = key % 12;
-	switch (note_in_octave)
-	{
-	case 1:
-		return 2.0/3.0;
-	case 3:
-		return 1.0/3.0;
-	case 6:
-		return 2.0/3.0;
-	case 8:
-		return 0.5;
-	case 10:
-		return 1.0/3.0;
-	default:
-		return 0;
-	}
-	return 0;
+	return 0.5;
 }
 
 static void
