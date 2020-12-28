@@ -1379,7 +1379,7 @@ keyboard_event_handler(GtkWidget *widget, GdkEventKey *event, gpointer notused)
 		return (TRUE);
 	}
 
-	if (event->keyval == GDK_KP_Subtract || event->keyval == GDK_minus) {
+	if (event->keyval == GDK_KP_Subtract) {
 		if (event->type == GDK_KEY_PRESS && octave > OCTAVE_MIN)
 			gtk_spin_button_set_value(GTK_SPIN_BUTTON(octave_spin), octave - 1);
 
