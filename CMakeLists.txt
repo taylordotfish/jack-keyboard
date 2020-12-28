@@ -31,7 +31,7 @@ set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/")
 set(VERSION "2.7.2")
 
 set(JackEnable ON CACHE BOOL "Enable support for Jack")
-set(LashEnable ON CACHE BOOL "Enable support for Lash")
+set(LashEnable OFF CACHE BOOL "Enable support for Lash")
 set(X11Enable ON CACHE BOOL "Enable support for X11")
 
 project(jack-keyboard)
