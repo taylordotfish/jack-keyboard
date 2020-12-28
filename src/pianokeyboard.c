@@ -681,8 +681,8 @@ piano_keyboard_draw_white_key (GtkWidget *widget, int x, int y, int w, int h, in
 	
 	pat = cairo_pattern_create_linear (x, y, x, y + h);
 	cairo_pattern_add_color_stop_rgb (pat, 0.0, 0.25, 0.25, 0.2);
-	cairo_pattern_add_color_stop_rgb (pat, 0.1, 0.957, 0.914, 0.925);
-	cairo_pattern_add_color_stop_rgb (pat, 1.0, 0.796, 0.787, 0.662);
+	cairo_pattern_add_color_stop_rgb (pat, 0.1, 0.957, 0.957, 0.957);
+	cairo_pattern_add_color_stop_rgb (pat, 1.0, 0.896, 0.896, 0.896);
 	cairo_set_source(c, pat);
 	cairo_fill(c);
 	
