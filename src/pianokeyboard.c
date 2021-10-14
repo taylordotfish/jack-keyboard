@@ -100,10 +100,10 @@ draw_note(PianoKeyboard *pk, int note)
 		piano_keyboard_draw_black_key(widget, x, 0, w, h, pressed, pk->notes[note].velocity);
 	}
 	
-	if (note < NNOTES - 2 && !pk->notes[note + 1].white)
+	if (is_white && note < NNOTES - 2 && !pk->notes[note + 1].white)
 		draw_note(pk, note + 1);
 	
-	if (note > 0 && !pk->notes[note - 1].white)
+	if (is_white && note > 0 && !pk->notes[note - 1].white)
 		draw_note(pk, note - 1);
 			
 	if (pk->enable_keyboard_cue)
@@ -235,56 +235,85 @@ bind_keys_qwerty(PianoKeyboard *pk)
 {
 	clear_notes(pk);
 
-	/* Lower keyboard row - "zxcvbnm". 52 is z, 38 is a. */
-	bind_key(pk, 52, 12);	/* C0 */
-	bind_key(pk, 39, 13);
-	bind_key(pk, 53, 14);
-	bind_key(pk, 40, 15);
-	bind_key(pk, 54, 16);
-	bind_key(pk, 55, 17);
-	bind_key(pk, 42, 18);
-	bind_key(pk, 56, 19);
-	bind_key(pk, 43, 20);
-	bind_key(pk, 57, 21);
-	bind_key(pk, 44, 22);
-	bind_key(pk, 58, 23);
+	///* Upper keyboard row, first octave - "qwertyu". 24 is q, 10 is 1. */
+	bind_key(pk, 49, 19 + 0); /* backtick */
+	bind_key(pk, 23, 19 + 1); /* tab */
+    bind_key(pk, 10, 19 + 2); /* 1 */
 
-	/* Map the remaining keys. This overlaps with qwe. */
-	bind_key(pk, 59, 24);
-	bind_key(pk, 46, 25);
-	bind_key(pk, 60, 26);
-	bind_key(pk, 47, 27);
-	bind_key(pk, 61, 28);
+	bind_key(pk, 24, 19 + 3); /* q */
+	bind_key(pk, 38, 19 + 4); /* a */
+	bind_key(pk, 11, 19 + 5); /* 2 */
+	bind_key(pk, 25, 19 + 6); /* w */
+	bind_key(pk, 39, 19 + 7); /* s */
+	bind_key(pk, 12, 19 + 8); /* 3 */
+	bind_key(pk, 26, 19 + 9); /* e */
+	bind_key(pk, 13, 19 + 10); /* 4 */
+	bind_key(pk, 27, 19 + 11); /* r */
+	bind_key(pk, 41, 19 + 12); /* f */
+	bind_key(pk, 14, 19 + 13); /* 5 */
+	bind_key(pk, 28, 19 + 14); /* t */
+	bind_key(pk, 42, 19 + 15); /* g */
+	bind_key(pk, 15, 19 + 16); /* 6 */
+	bind_key(pk, 29, 19 + 17); /* y */
+	bind_key(pk, 43, 19 + 18); /* h */
+	bind_key(pk, 16, 19 + 19); /* 7 */
+	bind_key(pk, 30, 19 + 20); /* u */
+	bind_key(pk, 17, 19 + 21); /* 8 */
 
-	/* Upper keyboard row, first octave - "qwertyu". 24 is q, 10 is 1. */
-	bind_key(pk, 49, 22); /* backtick */
-	bind_key(pk, 23, 23); /* tab */
-	bind_key(pk, 24, 24);
-	bind_key(pk, 11, 25);
-	bind_key(pk, 25, 26);
-	bind_key(pk, 12, 27);
-	bind_key(pk, 26, 28);
-	bind_key(pk, 27, 29);
-	bind_key(pk, 14, 30);
-	bind_key(pk, 28, 31);
-	bind_key(pk, 15, 32);
-	bind_key(pk, 29, 33);
-	bind_key(pk, 16, 34);
-	bind_key(pk, 30, 35);
+	///* Upper keyboard row, the rest - "iop". */
+	bind_key(pk, 31, 19 + 22); /* i */
+	bind_key(pk, 45, 19 + 23); /* k */
+	bind_key(pk, 18, 19 + 24); /* 9 */
+	bind_key(pk, 32, 19 + 25); /* o */
+	bind_key(pk, 46, 19 + 26); /* l */
+	bind_key(pk, 19, 19 + 27); /* 0 */
+	bind_key(pk, 33, 19 + 28); /* p */
 
-	/* Upper keyboard row, the rest - "iop". */
-	bind_key(pk, 31, 36);
-	bind_key(pk, 18, 37);
-	bind_key(pk, 32, 38);
-	bind_key(pk, 19, 39);
-	bind_key(pk, 33, 40);
+	///* We might as well bind these too: "[=]\" */
+	bind_key(pk, 20, 19 + 29); /* - */
+	bind_key(pk, 34, 19 + 30); /* [ */
+	bind_key(pk, 48, 19 + 31); /* ' */
+	bind_key(pk, 21, 19 + 32); /* + */
+	bind_key(pk, 35, 19 + 33); /* ] */
+	bind_key(pk, 36, 19 + 34); /* enter */
+	bind_key(pk, 22, 19 + 35); /* backspace */
+	bind_key(pk, 51, 19 + 36); /* yes, really, at least here... */
 
-	/* We might as well bind these too: "[=]\" */
-	bind_key(pk, 34, 41);
-	bind_key(pk, 21, 42);
-	bind_key(pk, 35, 43);
-	bind_key(pk, 22, 44); /* backspace */
-	bind_key(pk, 51, 45); /* yes, really, at least here... */
+    // Alternate bindings
+    #if 0
+	///* Upper keyboard row, first octave - "qwertyu". 24 is q, 10 is 1. */
+    bind_key(pk, 24, 19 + 2); /* q */
+	bind_key(pk, 38, 19 + 3); /* a */
+	bind_key(pk, 52, 19 + 4); /* z */
+	bind_key(pk, 25, 19 + 5); /* w */
+	bind_key(pk, 39, 19 + 6); /* s */
+	bind_key(pk, 53, 19 + 7); /* x */
+	bind_key(pk, 26, 19 + 8); /* e */
+	bind_key(pk, 40, 19 + 9); /* d */
+	bind_key(pk, 27, 19 + 10); /* r */
+	bind_key(pk, 41, 19 + 11); /* f */
+	bind_key(pk, 55, 19 + 12); /* v */
+	bind_key(pk, 28, 19 + 13); /* t */
+	bind_key(pk, 42, 19 + 14); /* g */
+	bind_key(pk, 56, 19 + 15); /* b */
+	bind_key(pk, 29, 19 + 16); /* y */
+	bind_key(pk, 43, 19 + 17); /* h */
+	bind_key(pk, 57, 19 + 18); /* n */
+	bind_key(pk, 30, 19 + 19); /* u */
+	bind_key(pk, 44, 19 + 20); /* j */
+	bind_key(pk, 31, 19 + 21); /* i */
+
+	///* Upper keyboard row, the rest - "iop". */
+	bind_key(pk, 45, 19 + 22); /* k */
+	bind_key(pk, 59, 19 + 23); /* , */
+	bind_key(pk, 32, 19 + 24); /* o */
+	bind_key(pk, 46, 19 + 25); /* l */
+	bind_key(pk, 60, 19 + 26); /* . */
+	bind_key(pk, 33, 19 + 27); /* p */
+	bind_key(pk, 47, 19 + 28); /* ; */
+	bind_key(pk, 34, 19 + 29); /* [ */
+	bind_key(pk, 48, 19 + 30); /* ' */
+    #endif
 }
 
 static gint
@@ -300,10 +329,11 @@ keyboard_event_handler(GtkWidget *mk, GdkEventKey *event, gpointer notused)
 		return (FALSE);
 	}
 
-	note += pk->octave * 12;
+	note += (pk->octave - 2) * 19;
 
-	assert(note >= 0);
-	assert(note < NNOTES);
+    if (note < 0 || note >= NNOTES) {
+        return (FALSE);
+    }
 
 	if (event->type == GDK_KEY_PRESS) {
 		press_key(pk, note);
@@ -427,32 +457,75 @@ piano_keyboard_size_request(GtkWidget *widget, GtkRequisition *requisition)
 
 static int is_black(int key)
 {
-	int note_in_octave = key % 12;
-	if(              note_in_octave == 1 || note_in_octave == 3 ||
-	     note_in_octave == 6 || note_in_octave == 8 || note_in_octave == 10)
-		return 1;
-	return 0;
-}
-
-static double black_key_left_shift(int key)
-{
-	int note_in_octave = key % 12;
+	int note_in_octave = (key + 16) % 19;
 	switch (note_in_octave)
 	{
 	case 1:
-		return 2.0/3.0;
-	case 3:
-		return 1.0/3.0;
-	case 6:
-		return 2.0/3.0;
-	case 8:
-		return 0.5;
+	case 2:
+	case 4:
+	case 5:
+	case 7:
+	case 9:
 	case 10:
-		return 1.0/3.0;
+	case 12:
+	case 13:
+	case 15:
+	case 16:
+	case 18:
+		return 1;
 	default:
 		return 0;
 	}
-	return 0;
+}
+
+static int black_key_left_shift(int key, int width)
+{
+	int note_in_octave = (key + 16) % 19;
+	switch (note_in_octave)
+	{
+	case 1:
+	case 4:
+	case 9:
+	case 12:
+	case 15:
+		return width;
+	case 2:
+	case 5:
+	case 10:
+	case 13:
+	case 16:
+		return 1;
+	case 7:
+	case 18:
+		return width / 2;
+	default:
+		return 0;
+	}
+}
+
+static double black_key_width_fraction(int key)
+{
+	int note_in_octave = (key + 16) % 19;
+	switch (note_in_octave)
+	{
+	case 1:
+	case 4:
+	case 9:
+	case 12:
+	case 15:
+		return 0.55;
+	case 2:
+	case 5:
+	case 10:
+	case 13:
+	case 16:
+		return 0.55;
+	case 7:
+	case 18:
+		return 0.7;
+	default:
+		return 0;
+	}
 }
 
 static void
@@ -478,11 +551,12 @@ recompute_dimensions(PianoKeyboard *pk)
 
 	for (note = 0, white_key = -skipped_white_keys; note < NNOTES; note++) {
 		if (is_black(note)) {
+			int width = black_key_width_fraction(note) * black_key_width;
 			/* This note is black key. */
 			pk->notes[note].x = pk->widget_margin + 
 			    (white_key * key_width) -
-			    (black_key_width * black_key_left_shift(note));
-			pk->notes[note].w = black_key_width;
+			    black_key_left_shift(note, width);
+			pk->notes[note].w = width;
 			pk->notes[note].h = (height * 3) / 5;
 			pk->notes[note].white = 0;
 			continue;

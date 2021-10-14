@@ -51,8 +51,8 @@ typedef struct	_PianoKeyboardClass		PianoKeyboardClass;
  127 = G9      (midi maximum)
 */
 #define NNOTES			128
-#define PIANO_MIN_NOTE		21
-#define PIANO_MAX_NOTE		108
+#define PIANO_MIN_NOTE		22
+#define PIANO_MAX_NOTE		117
 
 #define OCTAVE_MIN	-1
 #define OCTAVE_MAX	7
