@@ -238,7 +238,7 @@ bind_keys_qwerty(PianoKeyboard *pk)
 	///* Upper keyboard row, first octave - "qwertyu". 24 is q, 10 is 1. */
 	bind_key(pk, 49, 19 + 0); /* backtick */
 	bind_key(pk, 23, 19 + 1); /* tab */
-    bind_key(pk, 10, 19 + 2); /* 1 */
+	bind_key(pk, 10, 19 + 2); /* 1 */
 
 	bind_key(pk, 24, 19 + 3); /* q */
 	bind_key(pk, 38, 19 + 4); /* a */
@@ -279,10 +279,10 @@ bind_keys_qwerty(PianoKeyboard *pk)
 	bind_key(pk, 22, 19 + 35); /* backspace */
 	bind_key(pk, 51, 19 + 36); /* yes, really, at least here... */
 
-    // Alternate bindings
-    #if 0
+	// Alternate bindings
+	#if 0
 	///* Upper keyboard row, first octave - "qwertyu". 24 is q, 10 is 1. */
-    bind_key(pk, 24, 19 + 2); /* q */
+	bind_key(pk, 24, 19 + 2); /* q */
 	bind_key(pk, 38, 19 + 3); /* a */
 	bind_key(pk, 52, 19 + 4); /* z */
 	bind_key(pk, 25, 19 + 5); /* w */
@@ -313,7 +313,7 @@ bind_keys_qwerty(PianoKeyboard *pk)
 	bind_key(pk, 47, 19 + 28); /* ; */
 	bind_key(pk, 34, 19 + 29); /* [ */
 	bind_key(pk, 48, 19 + 30); /* ' */
-    #endif
+	#endif
 }
 
 static gint
@@ -331,9 +331,9 @@ keyboard_event_handler(GtkWidget *mk, GdkEventKey *event, gpointer notused)
 
 	note += (pk->octave - 2) * 19;
 
-    if (note < 0 || note >= NNOTES) {
-        return (FALSE);
-    }
+	if (note < 0 || note >= NNOTES) {
+		return (FALSE);
+	}
 
 	if (event->type == GDK_KEY_PRESS) {
 		press_key(pk, note);
