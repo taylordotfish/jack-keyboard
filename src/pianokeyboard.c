@@ -235,7 +235,7 @@ bind_keys_qwerty(PianoKeyboard *pk)
 {
 	clear_notes(pk);
 
-	///* Upper keyboard row, first octave - "qwertyu". 24 is q, 10 is 1. */
+	/* Upper keyboard row, first octave - "qwertyu". 24 is q, 10 is 1. */
 	bind_key(pk, 49, 19 + 0); /* backtick */
 	bind_key(pk, 23, 19 + 1); /* tab */
 	bind_key(pk, 10, 19 + 2); /* 1 */
@@ -260,7 +260,7 @@ bind_keys_qwerty(PianoKeyboard *pk)
 	bind_key(pk, 30, 19 + 20); /* u */
 	bind_key(pk, 17, 19 + 21); /* 8 */
 
-	///* Upper keyboard row, the rest - "iop". */
+	/* Upper keyboard row, the rest - "iop". */
 	bind_key(pk, 31, 19 + 22); /* i */
 	bind_key(pk, 45, 19 + 23); /* k */
 	bind_key(pk, 18, 19 + 24); /* 9 */
@@ -269,7 +269,7 @@ bind_keys_qwerty(PianoKeyboard *pk)
 	bind_key(pk, 19, 19 + 27); /* 0 */
 	bind_key(pk, 33, 19 + 28); /* p */
 
-	///* We might as well bind these too: "[=]\" */
+	/* We might as well bind these too: "[=]\" */
 	bind_key(pk, 20, 19 + 29); /* - */
 	bind_key(pk, 34, 19 + 30); /* [ */
 	bind_key(pk, 48, 19 + 31); /* ' */
@@ -281,7 +281,7 @@ bind_keys_qwerty(PianoKeyboard *pk)
 
 	// Alternate bindings
 	#if 0
-	///* Upper keyboard row, first octave - "qwertyu". 24 is q, 10 is 1. */
+	/* Upper keyboard row, first octave - "qwertyu". 24 is q, 10 is 1. */
 	bind_key(pk, 24, 19 + 2); /* q */
 	bind_key(pk, 38, 19 + 3); /* a */
 	bind_key(pk, 52, 19 + 4); /* z */
@@ -303,7 +303,7 @@ bind_keys_qwerty(PianoKeyboard *pk)
 	bind_key(pk, 44, 19 + 20); /* j */
 	bind_key(pk, 31, 19 + 21); /* i */
 
-	///* Upper keyboard row, the rest - "iop". */
+	/* Upper keyboard row, the rest - "iop". */
 	bind_key(pk, 45, 19 + 22); /* k */
 	bind_key(pk, 59, 19 + 23); /* , */
 	bind_key(pk, 32, 19 + 24); /* o */
