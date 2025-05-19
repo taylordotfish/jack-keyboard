@@ -1565,6 +1565,24 @@ note_off_event_handler(GtkWidget *widget, int note)
 	queue_new_message(MIDI_NOTE_OFF, note, *current_velocity);
 }
 
+gboolean
+is_dark_theme(const gchar *theme_name)
+{
+	if (!theme_name)
+		return FALSE;
+	size_t len = strlen(theme_name);
+	static const char suffix[] = "dark";
+	static const size_t suffix_len = sizeof(suffix) - 1;
+	if (len < suffix_len + 1)
+		return FALSE;
+	char c = theme_name[len - suffix_len - 1];
+	if (c >= 'a' && c <= 'z')
+		return FALSE;
+	if (c >= 'A' && c <= 'Z')
+		return FALSE;
+	return strcmp(theme_name + len - suffix_len, suffix) == 0;
+}
+
 void
 init_gtk_1(int *argc, char ***argv)
 {
@@ -1572,6 +1590,17 @@ init_gtk_1(int *argc, char ***argv)
 	GError *error = NULL;
 
 	gtk_init(argc, argv);
+
+	const char *no_theme = getenv("JACK_KEYBOARD_NO_OVERRIDE_THEME");
+	if (!(no_theme && *no_theme)) {
+		GtkSettings *settings = gtk_settings_get_default();
+		gchar *theme_name = NULL;
+		g_object_get(settings, "gtk-theme-name", &theme_name, NULL);
+		if (!is_dark_theme(theme_name)) {
+			g_object_set(settings, "gtk-theme-name", "Adwaita-dark", NULL);
+		}
+		g_free(theme_name);
+	}
 
 	icon = gtk_icon_theme_load_icon(gtk_icon_theme_get_default(), "jack-keyboard", 48, 0, &error);
 
